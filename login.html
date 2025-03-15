@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/img/logo.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <title>feedback</title>
+  </head>
+  <body>
+    <div class="left">
+      <p>
+        As vozes dos utilizadores dos seus productos ou serviços fazem toda a
+        diferença.
+      </p>
+      <p>
+        <i class="la la-phone-square la-lg"></i
+        ><span>847460853 / 872081978</span>
+      </p>
+    </div>
+    <div class="right">
+      <form>
+        <a href="/" class="logo">
+          <img src="assets/img/logo.svg" width="45" />
+          <h1>feedback</h1>
+        </a>
+        <label for="email">Email:</label>
+        <input type="email" name="email" required autofocus />
+        <label for="pass">Senha:</label>
+        <input type="password" name="pass" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+  </body>
+
+  <script src="js/config.js"></script>
+  <script>
+    if (localStorage.getItem("user") !== null) {
+      window.location.href = "/dashboard.html";
+    }
+
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.querySelector("button");
+      btn.disabled = true;
+      const form = new FormData(e.target);
+      const email = form.get("email");
+      const pass = form.get("pass");
+
+      try {
+        const res = await fetch(api_url + "/user/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            app: "box",
+          },
+          body: JSON.stringify({ email, pass }),
+        }).catch((error) => {
+          console.log(error);
+        });
+
+        if (res.status === 200) {
+          const data = await res.json();
+
+          localStorage.setItem("user", data.user._id);
+          window.location.href = "/dashboard.html";
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      btn.disabled = false;
+    });
+  </script>
+</html>

@@ -1,0 +1,49 @@
+:root {
+  --primary-color: blueviolet;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--primary-color);
+}
+
+input {
+  background: none;
+  border: 1px solid #444;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.asterix {
+  color: red;
+}

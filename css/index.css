@@ -1,0 +1,99 @@
+header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px;
+}
+
+header a.login {
+  background-color: #ddd;
+  border-radius: 100%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#head {
+  display: flex;
+  align-items: center;
+}
+
+#head #company-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #ddd;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(../assets/img/building.svg);
+  margin-right: 10px;
+  border: 3px solid #fff;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 40px 30px;
+  width: 470px;
+  margin: auto;
+  border-radius: 10px;
+  min-height: 340px;
+
+  box-shadow: 0 0 2px 2px #efefef;
+}
+
+textarea,
+input {
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 15px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+textarea:focus,
+input:focus {
+  border-color: blueviolet;
+}
+
+.btn {
+  padding: 15px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #8a2be2;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 2px 5px 10px #eee;
+  border-bottom: 2px solid #aaa;
+}
+
+#btn-search {
+  width: 20px;
+  height: 20px;
+  background: url(../assets/img/search.svg);
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+  display: none;
+}
+
+footer {
+  padding: 20px;
+}
+
+/* Responsive */
+@media screen and (max-width: 414px) {
+  form {
+    width: 90%;
+  }
+}

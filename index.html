@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>feedback</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="shortcut icon" href="assets/img/logo.svg" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <a href="login.html" class="login"
+        ><img src="assets/img/user.svg" alt="user-icon" width="30px"
+      /></a>
+    </header>
+    <div id="head">
+      <div id="company-img"></div>
+      <h2 id="company-label"></h2>
+      <button id="btn-search"></button>
+    </div>
+    <form>
+      <label for="desc"><span class="asterix">* </span>Seu comentário</label>
+      <textarea name="desc" id="desc" rows="10" autofocus required></textarea>
+      <label for="tel">Telefone (opcional)</label>
+      <input type="text" name="tel" id="tel" />
+      <label for="email">E-mail (opcional)</label>
+      <input type="email" name="email" id="email" />
+      <button type="submit" class="btn">Submeter</button>
+    </form>
+
+    <footer>
+      Powered by
+      <a target="_blank" href="https://advancedtechspace.com"
+        >advancedtechspace.com</a
+      >
+    </footer>
+  </body>
+
+  <script src="js/config.js"></script>
+  <script>
+    const url = new URL(window.location.href);
+    const company = url.searchParams.get("c");
+
+    if (!company) window.location.href += "?c=67ac514ba5dad8ec113c3e17";
+
+    getUser();
+
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const form = new FormData(e.target);
+      const desc = form.get("desc");
+      const tel = form.get("tel");
+      const email = form.get("email");
+
+      const data = { desc, tel, email, company };
+
+      try {
+        const res = await fetch(api_url + "/box/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (res.status === 200) {
+          alert("Obrigado pela sua contribuição.");
+        }
+      } catch (error) {
+        console.log(error);
+        alert("Houve um erro, tente novamente.");
+      }
+
+      e.target.reset();
+    });
+
+    async function getUser() {
+      if (company) {
+        const res = await fetch(api_url + "/user/" + company);
+        const user = await res.json();
+        document.getElementById("company-label").innerText = user.label;
+        document.getElementById("company-img").style.backgroundSize = "cover";
+        document.getElementById("company-img").style.backgroundImage = `url(${
+          api_url + "/cover/" + user.img
+        })`;
+      } else {
+        return;
+      }
+    }
+  </script>
+</html>
